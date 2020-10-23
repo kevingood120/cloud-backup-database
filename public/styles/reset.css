@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html, #root {
+    width: 100%;
+    height: 100%;
+}
+
+body, input, textarea {
+    font-family: Roboto, Arial, sans-serif;
+}
+
+.container {
+    max-width: 950px;
+    padding: 10px;
+    margin: 0 auto;
+}

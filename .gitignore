@@ -1,0 +1,4 @@
+.vscode
+backups
+node_modules
+src/config/index.ts

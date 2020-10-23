@@ -1,0 +1,27 @@
+{
+  "devDependencies": {
+    "@types/dateformat": "^3.0.1",
+    "@types/express": "^4.17.8",
+    "@types/mime-types": "^2.1.0",
+    "@types/mysql": "^2.15.15",
+    "@types/node": "^14.11.10",
+    "@types/socket.io": "^2.1.11",
+    "ts-node": "^9.0.0",
+    "ts-node-dev": "^1.0.0",
+    "tsc": "^1.20150623.0",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "dateformat": "^3.0.3",
+    "express": "^4.17.1",
+    "googleapis": "^61.0.0",
+    "mime-types": "^2.1.27",
+    "mysql": "^2.18.1",
+    "mysqldump": "^3.2.0",
+    "node-pv": "^0.1.5",
+    "socket.io": "^2.3.0"
+  },
+  "scripts": {
+    "dev": "ts-node-dev --inspect=0.0.0.0:7001 --cls --exit-child --respawn src/server.ts"
+  }
+}

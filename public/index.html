@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dateformat@3.0.3/lib/dateformat.js"></script>
+    <title>Backup</title>
+</head>
+<body>
+    <div id="root">
+        <header class="header">
+            <h3>Sistema de Backup</h3>
+        </header>
+        <div class="container">
+            <div class="tab-container">
+                <div class="tab-nav">
+                    <a href="javascript:void(0)">Backup</a>
+                    <a class="active" href="javascript:void(0)">Restaurar</a>
+                </div>
+                <div class="tab-content">
+                    <div class="restore-container">
+                        <p style="margin-bottom: 10px;" class="tab-title">Restaurar Backup</p>
+                        <div class="input-group">
+                            <label for="search-date">Pesquisar por data: </label>
+                            <input v-model.lazy="query.date" id="search-date" type="date">
+                        </div>
+                        <div class="input-group">
+                            <label for="search-drive">Pesquisar no: </label>
+                            <select v-model.lazy="query.drive" id="search-drive">
+                                <option value="0">Nuvem</option>
+                                <option value="1">Local</option>
+                            </select>
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th v-for="(column, index) in columns" :key="index">
+                                        {{column}}
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody v-if="data && data.length">
+                                <tr v-for="row in data" :key="row.id">
+                                    <td>{{row.fileName}}</td>
+                                    <td>{{row.createdAt | format-date}}</td>
+                                    <td>
+                                        <a @click="restore(row)" href="javascript:void(0)">Restaurar</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody v-else>
+                                <tr>
+                                    <td class="no-rows" :colspan="columns.length">
+                                        Sem linhas para serem exibidas
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <progress-system></progress-system>
+
+                        <p class="account-user">
+                            Conta associada: {{account}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="scripts/script.js"></script>
+</body>
+</html>

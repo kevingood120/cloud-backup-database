@@ -1,0 +1,26 @@
+.tab-container {
+    padding: 10px;
+}
+
+
+.tab-container .tab-title {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+
+.tab-container .tab-content {
+    padding: 10px 0px;
+}
+
+.tab-container .tab-nav a {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.tab-container .tab-nav a:hover,
+.tab-container .tab-nav a.active {
+    color: var(--blue-sapphire);
+}
