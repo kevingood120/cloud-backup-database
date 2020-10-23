@@ -62,7 +62,7 @@ class Main {
 
         }
         finally {
-            
+
         }
     }
 
@@ -76,10 +76,6 @@ class Main {
                 const filtered = files.filter(file => {
                     const combine = path.join(config.backupPath, file)
                     const stat = fs.statSync(combine)
-                    console.log({
-                        start: new Date(stat.birthtime.toLocaleDateString()),
-                        final: date
-                    })
                     return new Date(stat.birthtime.toLocaleDateString()).toDateString() === date.toDateString()
                 })
                 const result: DriveResult[] = filtered.map((file, index) => {

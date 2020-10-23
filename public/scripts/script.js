@@ -8,7 +8,8 @@ import './components/tab-restore.js'
 const app = new Vue({
     el: '#root',
     data: () => ({
-        selectedTab: 'restore'
+        selectedTab: 'restore',
+        disabled: false
     }),
     methods: {
         changeTab(tab) {

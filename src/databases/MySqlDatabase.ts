@@ -86,10 +86,7 @@ export default class MySqlDatabase implements Database {
             console.log(filePath, command)
             exec(command, (err, stdout, stderr) => {
                 if(err) reject(err)
-                else {
-                    console.log(stdout, stderr)
-                    resolve()
-                }
+                else resolve()
             })
         })
     }

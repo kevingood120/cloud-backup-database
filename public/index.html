@@ -12,17 +12,19 @@
 <body>
     <div id="root">
         <header class="header">
-            <h3>Sistema de Backup</h3>
+            Sistema de Backup
         </header>
         <div class="container">
             <div class="tab-container">
-                <div class="tab-nav">
+                <div class="tab-nav" :style="{pointerEvents: disabled ? 'none' : 'all'}">
                     <a href="#" :class="{ active: selectedTab === 'backup' }" @click.prevent="changeTab('backup')">Backup</a>
                     <a href="#" :class="{ active: selectedTab === 'restore' }" @click.prevent="changeTab('restore')">Restaurar</a>
                 </div>
+                
                 <div class="tab-content">
-                    <tab-restore v-show="selectedTab === 'restore'"></tab-restore>
-                    <tab-backup v-show="selectedTab === 'backup'"></tab-backup>
+                    <keep-alive>
+                        <component :is="'tab-' + selectedTab.toLowerCase()"></component>
+                    </keep-alive>
                 </div>
             </div>
         </div>
