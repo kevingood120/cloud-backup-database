@@ -2,3 +2,5 @@
 backups
 node_modules
 src/config/index.ts
+credentials.json
+token.json
