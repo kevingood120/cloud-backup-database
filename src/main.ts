@@ -1,8 +1,10 @@
 import Database from "./interfaces/Database";
-import Drive from "./interfaces/Drive"
+import Drive, { DriveResult } from "./interfaces/Drive"
 import config from './config'
 import fs, { readFile } from 'fs'
 import path from 'path'
+import mime from 'mime-types'
+import dateFormat from "dateformat";
 
 type ProgressOptions = {
     progress: (progress: number) => void
@@ -42,24 +44,59 @@ class Main {
 
     async createRestore({ step, progress, id, fileName }: ProgressOptions & { id: string, fileName: string }) {
         const filePath = path.join(config.backupPath, fileName)
-        if(fs.existsSync(filePath)) {
-            progress(0)
-            step('Arquivo encontrado, processo de restauração iniciado')
-            await this.database.restore({
-                filePath
-            })
-            progress(100)
-            step('Processo de restauração concluído com êxito')
+        try {
+            if(fs.existsSync(filePath)) {
+                progress(0)
+                step('Arquivo encontrado, processo de restauração iniciado')
+                await this.database.restore({
+                    filePath
+                })
+                progress(100)
+                step('Processo de restauração concluído com êxito')
+            }
+            else {
+                
+            }
         }
-        else {
-            console.log('nuvem')
+        catch {
+
+        }
+        finally {
+            
         }
     }
 
-    async searchBackup({ date, drive }: Query) {
-        console.log(date)
+    async searchBackup({ date, drive }: Query): Promise<DriveResult[]> {
         if(drive === 0) 
             return await this.drive.searchFiles(date)
+        else {
+            return new Promise((res,rej) => {
+                
+                const files = fs.readdirSync(config.backupPath)
+                const filtered = files.filter(file => {
+                    const combine = path.join(config.backupPath, file)
+                    const stat = fs.statSync(combine)
+                    console.log({
+                        start: new Date(stat.birthtime.toLocaleDateString()),
+                        final: date
+                    })
+                    return new Date(stat.birthtime.toLocaleDateString()).toDateString() === date.toDateString()
+                })
+                const result: DriveResult[] = filtered.map((file, index) => {
+                    const combine = path.join(config.backupPath, file)
+                    const stat = fs.statSync(combine)
+                    const mimeType = mime.contentType(combine)
+                    return {
+                        type: mimeType || '',
+                        id: index + '',
+                        createdAt: stat.birthtime,
+                        fileName: file
+                    }
+                })
+
+                res(result)
+            })
+        }
     }
 }
 

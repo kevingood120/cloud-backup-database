@@ -29,24 +29,5 @@ Vue.component('progress-system', {
         this.socket = io()
         this.socket.on('progress', this.onProgress)
         this.socket.on('step', this.onStep)
-    },
-    computed: {
-        progress: {
-            get() {
-                return this._progress
-            },
-            set(value) {
-                this.$emit('update:progress', value)
-            }
-        },
-        step: {
-            get() {
-                return this._step
-            },
-            set(value) {
-                this.$emit('update:step', value)
-            }
-            
-        }
     }
 })

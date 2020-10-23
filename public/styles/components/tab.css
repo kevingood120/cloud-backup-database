@@ -2,6 +2,10 @@
     padding: 10px;
 }
 
+.tab-container .tab-nav {
+    margin-bottom: 20px;
+}
+
 
 .tab-container .tab-title {
     font-size: 1.3rem;
